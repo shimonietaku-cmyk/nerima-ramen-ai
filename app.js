@@ -331,6 +331,15 @@ const ramenShops = [
 
 let currentFilter = 'all';
 
+function getGenreColor(genres) {
+    if (genres.includes('濃厚系')) return '#1a1a1a';
+    if (genres.includes('あっさり系')) return '#d4622a';
+    if (genres.includes('鶏白湯')) return '#1a9e75';
+    if (genres.includes('まぜそば') || genres.includes('つけ麺')) return '#5b7ec9';
+    if (genres.includes('家系')) return '#8b4b8b';
+    return '#ccc'; // その他など
+}
+
 function renderShops() {
     const container = document.getElementById('shop-container');
     container.innerHTML = '';
@@ -338,6 +347,11 @@ function renderShops() {
     const filteredShops = currentFilter === 'all' 
         ? ramenShops 
         : ramenShops.filter(shop => shop.genres.includes(currentFilter));
+
+    const countDisplay = document.getElementById('shop-count-display');
+    if (countDisplay) {
+        countDisplay.textContent = `全${filteredShops.length}店舗`;
+    }
 
     if (filteredShops.length === 0) {
         container.innerHTML = '<p style="text-align:center; color:#666; margin-top:20px;">該当する店舗がありません。</p>';
@@ -347,6 +361,9 @@ function renderShops() {
     filteredShops.forEach(shop => {
         const card = document.createElement('div');
         card.className = 'shop-card';
+        
+        // 追加: ジャンルごとのアクセントライン（左ボーダー4px）
+        card.style.borderLeft = `4px solid ${getGenreColor(shop.genres)}`;
 
         // Google Maps Link Creation
         const mapQuery = encodeURIComponent(shop.mapKeyword || (shop.name + " " + shop.area));
@@ -362,6 +379,7 @@ function renderShops() {
                     <span class="recommendation-label">おすすめ</span>
                     <span class="recommendation-menu">${shop.recommendation}</span>
                 </div>
+                <div class="shop-footer">※営業時間・定休日は変更になる場合があります。事前にご確認ください。</div>
             </div>
         `;
 
