@@ -22,11 +22,40 @@
     </header>
 
     <main>
+        <!-- Filter Section -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-genre="all">全て</button>
+            <button class="filter-btn" data-genre="濃厚系">濃厚系</button>
+            <button class="filter-btn" data-genre="あっさり系">あっさり系</button>
+            <button class="filter-btn" data-genre="ガッツリ系">ガッツリ系</button>
+            <button class="filter-btn" data-genre="つけ麺">つけ麺</button>
+        </div>
+
         <div id="shop-container" class="shop-container">
             <!-- カードはJavaScriptで動的に生成されます -->
             <p style="text-align:center; color:#666;">読み込み中...</p>
         </div>
     </main>
+
+    <!-- AI Chat Box -->
+    <div id="chat-widget" class="chat-widget">
+        <button id="chat-toggle-btn" class="chat-toggle-btn" onclick="toggleChat()">
+            🤖 AIに相談する
+        </button>
+        <div id="chat-window" class="chat-window hidden">
+            <div class="chat-header">
+                <h3>🍜 ラーメンAIアシスタント</h3>
+                <button class="close-btn" onclick="toggleChat()">×</button>
+            </div>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message ai-message">こんにちは！今日の気分を教えてください。（例：「濃厚系が食べたい」「あっさり系は？」）</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="メッセージを入力..." onkeypress="handleChatKeyPress(event)">
+                <button id="chat-send-btn" onclick="sendMessage()">送信</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="./app.js"></script>
