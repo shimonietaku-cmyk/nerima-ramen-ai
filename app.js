@@ -427,23 +427,59 @@ function appendMessage(text, sender) {
 }
 
 function generateAIResponse(message) {
-    if (message.includes('濃厚') || message.includes('こってり') || message.includes('どろどろ') || message.includes('豚骨')) {
-        return '濃厚・豚骨系なら「麺処 井の庄」の辛辛魚や、「RAMEN GOTTSU」、「らーめん こうすけ」、「ふくちゃん」などがおすすめです！';
-    } else if (message.includes('あっさり') || message.includes('さっぱり') || message.includes('昔ながら') || message.includes('醤油') || message.includes('塩')) {
-        return 'あっさり系がお好みなら、最高峰の「中華そば べんてん」や「ぼにしも」、生姜が効いた「安ざわ家」、ビブグルマン選出の「麺や金時」の塩らぁ麺はいかがでしょうか？';
-    } else if (message.includes('ガッツリ') || message.includes('お肉') || message.includes('たくさん') || message.includes('多く')) {
-        return 'ガッツリ食べたい時は、チャーシューエッグ定食が人気の「安ざわ家」や、ボリューム満点な「井の庄」の濃菜麺、熱々の「睡大虎」がイチオシです！';
-    } else if (message.includes('鶏白湯')) {
-        return '鶏白湯ならコラーゲンたっぷりで人気の「麺屋 藤しろ」や、水炊き製法の「うかんむり」が絶品ですよ！';
-    } else if (message.includes('まぜそば') || message.includes('汁なし')) {
-        return 'まぜそばでしたら、「麺 酒 やまの」の王道まぜそばか、「麺や金時」の汁なし担々麺、「らぁ麺 和來」のトリュフ薫るまぜそばがオススメです。';
-    } else if (message.includes('つけ麺')) {
-        return 'つけ麺なら激辛で有名な「麺処 井の庄」や、王道の「富士見台 大勝軒」、「石神井とら」が評価が高いですよ！';
-    } else if (message.includes('家系')) {
-        return '家系ラーメンなら「ラーメン春樹 石神井公園店」や「げんこつらぅめん 屋台や」がありますよ。';
-    } else {
-        return 'なるほど！他に気になるキーワード（「濃厚」「あっさり」「つけ麺」「まぜそば」「鶏白湯」など）はありますか？';
+    const keywords = message.trim().split(/\s+|、|。|・|，|．/);
+    if (keywords.length === 0 || keywords[0] === '') {
+        return 'キーワードを入力して検索できます！（例：「大泉学園 濃厚」「桜台 あっさり」など）';
     }
+
+    let results = ramenShops;
+
+    // AND search for all keywords
+    keywords.forEach(keyword => {
+        if (!keyword) return;
+        const lowerKeyword = keyword.toLowerCase();
+        
+        // Define some synonym mappings for genres
+        let searchKeyword = lowerKeyword;
+        if (searchKeyword.includes('こってり') || searchKeyword.includes('どろどろ') || searchKeyword.includes('豚骨')) searchKeyword = '濃厚';
+        if (searchKeyword.includes('さっぱり') || searchKeyword.includes('昔ながら') || searchKeyword.includes('塩') || searchKeyword.includes('醤油')) searchKeyword = 'あっさり';
+        if (searchKeyword.includes('お肉') || searchKeyword.includes('たくさん') || searchKeyword.includes('がっつり')) searchKeyword = 'ガッツリ';
+        if (searchKeyword.includes('汁なし')) searchKeyword = 'まぜそば';
+
+        results = results.filter(shop => {
+            const inName = shop.name.toLowerCase().includes(searchKeyword);
+            const inArea = shop.area.toLowerCase().includes(searchKeyword);
+            const inGenre = shop.genres.some(g => g.toLowerCase().includes(searchKeyword));
+            const inFeatures = shop.features.toLowerCase().includes(searchKeyword);
+            const inRecommend = shop.recommendation.toLowerCase().includes(searchKeyword);
+
+            return inName || inArea || inGenre || inFeatures || inRecommend;
+        });
+    });
+
+    if (results.length === 0) {
+        return `「${message}」に一致する店舗は見つかりませんでした。\n条件を変えてもう一度お試しください！`;
+    }
+
+    // Format the response
+    let responseText = '';
+    
+    // Group by area for better presentation if there are many results
+    const areas = [...new Set(results.map(s => s.area.split('・')[0].split('駅')[0]))];
+    const mainArea = areas[0];
+
+    if (areas.length === 1) {
+        responseText = `${mainArea}エリアのおすすめはこちらです！\n`;
+    } else {
+        responseText = `おすすめの店舗はこちらです！（全${results.length}件）\n`;
+    }
+
+    results.forEach(shop => {
+        const genreStr = shop.genres[0] || 'その他';
+        responseText += `・${shop.name}（${genreStr}）${shop.recommendation}\n`;
+    });
+
+    return responseText;
 }
 
 // Initial Setup
