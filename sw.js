@@ -1,31 +1,18 @@
-const CACHE_NAME = 'nerima-ramen-v1';
-const urlsToCache = [
-  './',
-  './index.html',
-  './style.css',
-  './app.js',
-  './icon.svg',
-  './manifest.json'
-];
+const CACHE_NAME = 'nerima-ramen-v' + Date.now();
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(urlsToCache);
-      })
-  );
+self.addEventListener('install', e => {
+  self.skipWaiting();
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.map(key => caches.delete(key)))
+    )
   );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
 });

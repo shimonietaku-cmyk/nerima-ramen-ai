@@ -10,6 +10,8 @@
     <!-- End Google Tag Manager -->
 
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>練馬ラーメンガイド</title>
     
@@ -21,6 +23,10 @@
     <meta name="theme-color" content="#e65100">
     <link rel="apple-touch-icon" href="./icon.svg">
     
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -36,6 +42,12 @@
     </header>
 
     <main>
+        <!-- View Toggle Tab -->
+        <div class="view-toggle">
+            <button class="view-btn active" id="btn-list" onclick="switchView('list')">リスト</button>
+            <button class="view-btn" id="btn-map" onclick="switchView('map')">マップ</button>
+        </div>
+
         <!-- Filter Section -->
         <div class="filter-container">
             <button class="filter-btn active" data-genre="all">全て</button>
@@ -51,6 +63,10 @@
         <div id="shop-container" class="shop-container">
             <!-- カードはJavaScriptで動的に生成されます -->
             <p style="text-align:center; color:#666;">読み込み中...</p>
+        </div>
+
+        <div id="map-wrap" class="map-wrap hidden">
+            <div id="map"></div>
         </div>
     </main>
 

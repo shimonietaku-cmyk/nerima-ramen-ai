@@ -2,7 +2,7 @@
   "name": "練馬ラーメンガイド",
   "short_name": "練馬ラーメン",
   "description": "練馬区のおすすめラーメン店を紹介するアプリです。",
-  "start_url": "./index.html",
+  "start_url": "/?v=2",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#e65100",
