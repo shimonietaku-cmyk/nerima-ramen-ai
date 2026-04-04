@@ -13,15 +13,20 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>練馬ラーメンガイド</title>
+    <title>NERIMA RAMEN GUIDE | 練馬ラーメンガイド</title>
     
     <!-- SEO -->
-    <meta name="description" content="練馬区のおすすめラーメン店を紹介するアプリ。スマホ対応でPWAとしてもインストール可能です。">
+    <meta name="description" content="練馬区の厳選ラーメン店ガイド。A premium guide to the best ramen in Nerima, Tokyo.">
     
     <!-- PWA -->
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#e65100">
+    <meta name="theme-color" content="#0a0a0a">
     <link rel="apple-touch-icon" href="./icon.svg">
+    
+    <!-- Fonts: Inter, Noto Sans JP, Oswald -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     
     <!-- Leaflet Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -36,33 +41,57 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <header>
-        <h1>🍜 練馬ラーメンガイド</h1>
-        <p id="shop-count-display" style="font-size: 13px; margin-top: 4px; color: #ccc;"></p>
+    <header class="glass-header">
+        <div class="header-content">
+            <h1><span class="en-title">NERIMA RAMEN</span><br><span class="ja-title">練馬ラーメンガイド</span></h1>
+            <p id="shop-count-display" class="shop-count"></p>
+        </div>
     </header>
 
     <main>
         <!-- View Toggle Tab -->
         <div class="view-toggle">
-            <button class="view-btn active" id="btn-list" onclick="switchView('list')">リスト</button>
-            <button class="view-btn" id="btn-map" onclick="switchView('map')">マップ</button>
+            <button class="view-btn active" id="btn-list" onclick="switchView('list')">
+                <span class="en">LIST</span><span class="ja">リスト</span>
+            </button>
+            <button class="view-btn" id="btn-map" onclick="switchView('map')">
+                <span class="en">MAP</span><span class="ja">マップ</span>
+            </button>
         </div>
 
         <!-- Filter Section -->
         <div class="filter-container">
-            <button class="filter-btn active" data-genre="all">全て</button>
-            <button class="filter-btn" data-genre="濃厚系">濃厚系</button>
-            <button class="filter-btn" data-genre="あっさり系">あっさり系</button>
-            <button class="filter-btn" data-genre="鶏白湯">鶏白湯</button>
-            <button class="filter-btn" data-genre="まぜそば">まぜそば</button>
-            <button class="filter-btn" data-genre="つけ麺">つけ麺</button>
-            <button class="filter-btn" data-genre="家系">家系</button>
-            <button class="filter-btn" data-genre="その他">その他</button>
+            <button class="filter-btn active" data-genre="all">
+                <span class="en">All</span><span class="ja">全て</span>
+            </button>
+            <button class="filter-btn" data-genre="濃厚系">
+                <span class="en">Rich</span><span class="ja">濃厚・ガッツリ</span>
+            </button>
+            <button class="filter-btn" data-genre="あっさり系">
+                <span class="en">Light</span><span class="ja">あっさり</span>
+            </button>
+            <button class="filter-btn" data-genre="鶏白湯">
+                <span class="en">Paitan</span><span class="ja">鶏白湯</span>
+            </button>
+            <button class="filter-btn" data-genre="家系">
+                <span class="en">Iekei</span><span class="ja">家系</span>
+            </button>
+            <button class="filter-btn" data-genre="まぜそば">
+                <span class="en">Soupless</span><span class="ja">まぜそば</span>
+            </button>
+            <button class="filter-btn" data-genre="つけ麺">
+                <span class="en">Tsukemen</span><span class="ja">つけ麺</span>
+            </button>
+            <button class="filter-btn" data-genre="その他">
+                <span class="en">Others</span><span class="ja">その他</span>
+            </button>
         </div>
 
         <div id="shop-container" class="shop-container">
-            <!-- カードはJavaScriptで動的に生成されます -->
-            <p style="text-align:center; color:#666;">読み込み中...</p>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading Data...</p>
+            </div>
         </div>
 
         <div id="map-wrap" class="map-wrap hidden">
@@ -72,20 +101,32 @@
 
     <!-- AI Chat Box -->
     <div id="chat-widget" class="chat-widget">
-        <button id="chat-toggle-btn" class="chat-toggle-btn" onclick="toggleChat()">
-            🤖 AIに相談する
+        <button id="chat-toggle-btn" class="chat-toggle-btn glassmorphism" onclick="toggleChat()">
+            <span class="chat-icon">✧</span> 
+            <span class="chat-text"><span class="en">AI Concierge</span>AIコンシェルジュに相談</span>
         </button>
-        <div id="chat-window" class="chat-window hidden">
+        <div id="chat-window" class="chat-window hidden glassmorphism">
             <div class="chat-header">
-                <h3>🍜 ラーメンAIアシスタント</h3>
+                <h3>Ramen AI Concierge</h3>
                 <button class="close-btn" onclick="toggleChat()">×</button>
             </div>
             <div id="chat-messages" class="chat-messages">
-                <div class="message ai-message">条件を入力して店舗を検索できます！<br>（例：「大泉学園 濃厚」「深夜 コスパ」など）</div>
+                <div class="message ai-message">
+                    どんなラーメンをお探しですか？気分や希望のエリアを教えてください！<br>
+                    <span class="en-msg">What kind of ramen are you looking for? (e.g. "Spicy", "Oizumi")</span>
+                </div>
             </div>
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="メッセージを入力..." onkeypress="handleChatKeyPress(event)">
-                <button id="chat-send-btn" onclick="sendMessage()">送信</button>
+            <div class="mood-tags-container">
+                <p class="mood-prompt"><span class="en">Tap a mood to get a recommendation!</span><br>ご希望のキーワードをタップしてください👇</p>
+                <div class="mood-tags">
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('濃厚・ガッツリ / Rich & Heavy', '濃厚')">🍜 濃厚・ガッツリ (Rich & Heavy)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('あっさり・スッキリ / Clean & Light', 'あっさり')">塩 あっさり・スッキリ (Clean & Light)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('魚介系 / Seafood Broth', '魚介')">🐟 魚介系 (Seafood Broth)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('深夜営業 / Late Night', '深夜')">🌙 深夜営業 (Late Night)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('スパイシー / Spicy', '辛')">🔥 スパイシー (Spicy)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('つけ麺・まぜそば / Soupless', 'つけ麺 まぜそば')">🥢 つけ麺・まぜそば (Soupless)</button>
+                    <button class="mood-btn glassmorphism" onclick="sendMessage('ミシュラン・百名店 / Premium', 'ミシュラン 百名店')">🌟 百名店・アワード (Premium)</button>
+                </div>
             </div>
         </div>
     </div>

@@ -1,438 +1,131 @@
 const ramenShops = [
-  // ===== 石神井公園エリア =====
-  {
-    name: "麺処 井の庄",
-    area: "石神井公園駅",
-    genres: ["濃厚系"],
-    features: "食べログTOKYO百名店。辛辛魚つけ麺が看板。豚と魚介の濃厚スープに唐辛子が絡む。カップラーメンにもなった超有名店。",
-    recommendation: "辛辛魚つけ麺",
-    mapKeyword: "麺処 井の庄 石神井公園",
-    lat: 35.7381,
-    lng: 139.5986,
-    image: "🌶️"
-  },
-  {
-    name: "らぁ麺 和來",
-    area: "石神井公園駅",
-    genres: ["まぜそば"],
-    features: "トリュフ薫る漬け卵黄のまぜそばが絶品。中太ツルツルもちもち麺が自慢。丁寧に仕上げた淡麗スープも人気。",
-    recommendation: "まぜそば〜トリュフ薫る漬け卵黄添え〜",
-    mapKeyword: "らぁ麺 和來 石神井公園",
-    lat: 35.7375,
-    lng: 139.5990,
-    image: "🥚"
-  },
-  {
-    name: "ラーメン春樹 石神井公園店",
-    area: "石神井公園駅",
-    genres: ["家系"],
-    features: "石神井公園の家系ラーメン。濃厚な魚介豚骨醤油スープ。麺の硬さ・味の濃さ・油の量を細かくカスタマイズ可能。深夜まで営業。",
-    recommendation: "ラーメン（麺かため・味普通）",
-    mapKeyword: "ラーメン春樹 石神井公園",
-    lat: 35.7368,
-    lng: 139.5978,
-    image: "🍜"
-  },
-  {
-    name: "石神井とら",
-    area: "石神井公園駅・練馬高野台駅",
-    genres: ["つけ麺"],
-    features: "昭和の記憶を感じる現代の正統派つけ麺。甘酢が効いた動物系乾物系スープ。酸味好きにはたまらない一杯。",
-    recommendation: "つけ麺",
-    mapKeyword: "石神井とら 石神井公園",
-    lat: 35.7370,
-    lng: 139.5970,
-    image: "🐅"
-  },
-  {
-    name: "ラーメンハウスなか",
-    area: "石神井公園駅",
-    genres: ["あっさり系"],
-    features: "ワンコイン500円で食べられる昔懐かしい醤油ラーメン。細麺・太麺から選択可。追加トッピングも50円から。",
-    recommendation: "醤油ラーメン",
-    mapKeyword: "ラーメンハウスなか 石神井公園",
-    lat: 35.7385,
-    lng: 139.5995,
-    image: "🍥"
-  },
+  // 1-10 新規追加 (Recent 10)
+  { name: "清麺常藤", en_name: "Seimen Tsunefuji", area: "東大泉", genres: ["つけ麺"], features: "小麦の香りが引き立つ自家製麺と、濃厚で深みのあるつけ汁が絶賛されるつけ麺専門店。", en_features: "Specialty tsukemen shop highly praised for its deeply flavorful dipping broth and aromatic homemade noodles.", recommendation: "特製つけ麺 / Special Tsukemen", lat: 35.750149, lng: 139.5851632 },
+  { name: "八代目野中家", en_name: "Nonakaya", area: "豊玉北・練馬", genres: ["家系", "濃厚系"], features: "超濃厚でパンチの効いた豚骨醤油スープが特徴。ライスとの相性が抜群な本格家系。", en_features: "Authentic Iekei ramen featuring an ultra-rich and punchy pork-soy broth that pairs perfectly with rice.", recommendation: "ラーメン / Iekei Ramen", lat: 35.7369362, lng: 139.6540472 },
+  { name: "麺屋 蕃茄", en_name: "Menya Banko", area: "東大泉", genres: ["つけ麺", "あっさり系"], features: "トマトを使った独創的なつけ麺が大人気。女性客も多く、ヘルシーでありながら旨味が強い。", en_features: "Famous for its creative tomato-based tsukemen. Very popular for its healthy yet umami-packed flavor.", recommendation: "トマトつけ麺 / Tomato Tsukemen", lat: 35.7490521, lng: 139.5872704 },
+  { name: "麺屋 音 練馬店", en_name: "Menya Oto", area: "練馬", genres: ["濃厚系", "その他"], features: "とろみのある濃厚煮干しそばが看板。銀色の美しいスープは煮干しの旨味が凝縮されている。", en_features: "Signature rich 'Niboshi' (dried sardine) ramen with a thick, beautiful silver broth packed with umami.", recommendation: "特製煮干しそば / Special Niboshi Soba", lat: 35.7375635, lng: 139.6532012 },
+  { name: "まぜそば ほうきぼし", en_name: "Houkiboshi", area: "練馬", genres: ["まぜそば"], features: "特製スパイスとモチモチ太麺が絡み合う、台湾まぜそばの名店。ジャンクでやみつきになる味。", en_features: "Renowned for its spicy Taiwan Mazesoba. The thick, chewy noodles mixed with special spices are addictive.", recommendation: "台湾まぜそば / Taiwan Mazesoba", lat: 35.7377545, lng: 139.6546377 },
+  { name: "ラーメン 我羅奢", en_name: "Garasha", area: "練馬", genres: ["あっさり系", "鶏白湯"], features: "鶏の旨味を丁寧に抽出した鶏白湯と、スッキリとした醤油が選べる。飲み干せるスープが魅力。", en_features: "Offers a choice between a smooth, carefully extracted Tori Paitan and a clean Shoyu. You'll want to drink every drop.", recommendation: "鶏白湯らーめん / Tori Paitan Ramen", lat: 35.738914, lng: 139.653303 },
+  { name: "徳丸家", en_name: "Tokumaruya", area: "北町", genres: ["家系", "濃厚系"], features: "北町エリアで愛される正統派の横浜家系。クリーミーな豚骨醤油にファンが多い。", en_features: "An orthodox Yokohama Iekei ramen loved in the Kitamachi area. Fans adore its creamy pork-soy broth.", recommendation: "ラーメン（味玉入り）/ Iekei Ramen with Egg", lat: 35.7681432, lng: 139.660127 },
+  { name: "麺屋 こころ 練馬店", en_name: "Menya Kokoro", area: "練馬", genres: ["まぜそば", "その他"], features: "台湾まぜそば発祥の系譜を受け継ぐ名店。ニンニクとピリ辛ミンチのパンチが強烈。", en_features: "A famous shop inheriting the pedigree of Taiwan Mazesoba. The punch of garlic and spicy minced meat is intense.", recommendation: "台湾まぜそば / Taiwan Mazesoba", lat: 35.7383174, lng: 139.6525209 },
+  { name: "麺屋 黒田", en_name: "Menya Kuroda", area: "練馬", genres: ["濃厚系", "その他"], features: "マー油の香ばしさが食欲をそそる本格熊本ラーメン。豚骨の旨味とニンニクの香りが最高。", en_features: "Authentic Kumamoto ramen featuring the appetizing aroma of roasted garlic oil (Ma-yu) and rich pork broth.", recommendation: "黒ラーメン / Black Kumamoto Ramen", lat: 35.7366873, lng: 139.6548616 },
+  { name: "ろくはうす", en_name: "Rokuhouse", area: "石神井町", genres: ["あっさり系", "その他"], features: "地元の人に愛されるアットホームな老舗。昔懐かしいホッとする味わいの塩・醤油ラーメンを提供。", en_features: "A cozy, long-established shop loved by locals. Serves comforting, old-fashioned Shio and Shoyu ramen.", recommendation: "塩ラーメン / Shio Ramen", lat: 35.7428685, lng: 139.6057263 },
 
-  // ===== 大泉学園エリア =====
-  {
-    name: "中華そば 座座",
-    area: "大泉学園駅",
-    genres: ["あっさり系"],
-    features: "2021年開業。バラ先軟骨のトロトロ煮（バイカ）が乗った個性派ラーメン。黒いスープなのにコクがあって甘みも感じる。",
-    recommendation: "バイカ中華そば",
-    mapKeyword: "中華そば 座座 大泉学園",
-    lat: 35.7520,
-    lng: 139.5820,
-    image: "🥩"
-  },
-  {
-    name: "麺亭 英（はなぶさ）",
-    area: "大泉学園駅",
-    genres: ["あっさり系"],
-    features: "2025年オープンの新店。大泉学園駅北口から徒歩12分。11時〜15時・18時〜20時の営業。こだわりの醤油ラーメン。",
-    recommendation: "醤油ラーメン",
-    mapKeyword: "麺亭 英 大泉学園",
-    lat: 35.7515,
-    lng: 139.5815,
-    image: "🍜"
-  },
-  {
-    name: "らーめん こうすけ",
-    area: "大泉学園駅",
-    genres: ["あっさり系"],
-    features: "路地裏に佇む大泉の名店。透明感ある醤油スープと細麺のバランスが絶妙。塩ラーメンが特に人気で小丼との組み合わせも◎",
-    recommendation: "塩ラーメン＋小丼",
-    mapKeyword: "らーめん こうすけ 大泉学園",
-    lat: 35.7518,
-    lng: 139.5818,
-    image: "🧂"
-  },
-  {
-    name: "睡大虎",
-    area: "大泉学園駅",
-    genres: ["その他"],
-    features: "石神井公園と大泉学園のほぼ中間に位置する老舗。グツグツ熱々の土鍋ラーメンが名物。ボリューム満点で現業系・学生に人気。",
-    recommendation: "土鍋塩ラーメン",
-    mapKeyword: "睡大虎 大泉学園",
-    lat: 35.7412,
-    lng: 139.5902,
-    image: "🍲"
-  },
-  {
-    name: "丸源ラーメン 大泉学園店",
-    area: "大泉学園駅",
-    genres: ["濃厚系"],
-    features: "肉そばが看板メニューのチェーン。豚骨鶏ガラの濃厚スープに甘辛肉の組み合わせ。平日・土日祝10:30〜25:00まで営業。",
-    recommendation: "肉そば",
-    mapKeyword: "丸源ラーメン 大泉学園",
-    lat: 35.7522,
-    lng: 139.5825,
-    image: "🍖"
-  },
+  // 11-15 前回の新規追加 (Previous New 5)
+  { name: "中華そば ます田", en_name: "Chuka Soba Masuda", area: "練馬駅", genres: ["あっさり系"], features: "鶏ガラベースの透き通ったスープが特徴の王道中華そば。常に行列が絶えない練馬の新たな名店。", en_features: "Classic clear shoyu (soy sauce) broth ramen with a delicate chicken base. Constantly draws a line of fans.", recommendation: "特製中華そば / Special Shoyu Ramen", lat: 35.7376749, lng: 139.6555088 },
+  { name: "山陰魚介 Minatomen", en_name: "Minatomen", area: "練馬駅", genres: ["あっさり系"], features: "山陰地方の新鮮な食材を使用した、魚介の出汁と旨味が際立つプレミアムな中華蕎麦。", en_features: "Premium Chuka Soba featuring fresh seafood ingredients from the San'in region. Incredible umami flavor.", recommendation: "特製魚介中華蕎麦 / Special Seafood Ramen", lat: 35.7423377, lng: 139.6548777 },
+  { name: "ラーメン見田家", en_name: "Ramen Mitaya", area: "練馬駅", genres: ["家系", "濃厚系"], features: "ライス無料サービスが嬉しい、濃厚で中毒性のある本格横浜家系ラーメン。ガッツリ食べたい時に。", en_features: "Authentic, rich Yokohama Iekei (pork/soy) ramen. Very addictive and comes with free rice.", recommendation: "ラーメン+ 無料ライス / Ramen & Free Rice", lat: 35.7373197, lng: 139.6536792 },
+  { name: "麺屋 寿", en_name: "Menya Kotobuki", area: "下石神井", genres: ["あっさり系"], features: "シンプルながらも一つ一つの素材が丁寧に作られたハイクオリティな醤油ラーメン。", en_features: "Highly refined and simple shoyu ramen made with carefully selected ingredients.", recommendation: "特製醤油ラーメン / Premium Shoyu Ramen", lat: 35.7272258, lng: 139.6033215 },
+  { name: "富士亭", en_name: "Fujitei", area: "北町", genres: ["濃厚系", "その他"], features: "胡麻の風味が豊かな、濃厚でクリーミーな担々麺が地域の絶大な支持を集める。", en_features: "Famous for its rich, creamy, and sesame-flavored Tantanmen (spicy noodle). Highly loved by locals.", recommendation: "特製担々麺 / Special Tantanmen", lat: 35.7673521, lng: 139.6636132 },
 
-  // ===== 練馬駅エリア =====
-  {
-    name: "RAMEN GOTTSU",
-    area: "練馬駅",
-    genres: ["濃厚系"],
-    features: "カフェのようなおしゃれな外観で女性にも大人気。魚介豚骨の濃密白湯スープ。食べログ高評価の実力店。",
-    recommendation: "GOTTSUらーめん（鶏・豚2種チャーシュー）",
-    mapKeyword: "RAMEN GOTTSU 練馬",
-    lat: 35.7448,
-    lng: 139.6508,
-    image: "🍜"
-  },
-  {
-    name: "濃菜麺 井の庄 練馬店",
-    area: "練馬駅",
-    genres: ["濃厚系"],
-    features: "石神井公園の名店の系列。野菜たっぷりの濃厚スープ。辛さ調節可能な辛辛濃菜麺が名物。",
-    recommendation: "辛辛濃菜麺",
-    mapKeyword: "濃菜麺 井の庄 練馬",
-    lat: 35.7445,
-    lng: 139.6515,
-    image: "🥬"
-  },
-  {
-    name: "ぼにしも",
-    area: "練馬駅",
-    genres: ["あっさり系"],
-    features: "練馬駅から徒歩4分。昔ながらの懐かしい鶏と魚介のあっさりスープ。L字カウンター11席のみの小さなお店。",
-    recommendation: "チャーシューめん",
-    mapKeyword: "ぼにしも 練馬",
-    lat: 35.7442,
-    lng: 139.6502,
-    image: "🍥"
-  },
-  {
-    name: "ドリルマン",
-    area: "練馬駅",
-    genres: ["あっさり系"],
-    features: "練馬駅から徒歩2分。国産素材・秋田県産醤油にこだわるレンガ調のスタイリッシュな店。煮干し系が絶品。",
-    recommendation: "特製中華そば（煮干し）",
-    mapKeyword: "ドリルマン 練馬",
-    lat: 35.7450,
-    lng: 139.6520,
-    image: "🐟"
-  },
-  {
-    name: "博多水炊きらーめん うかんむり",
-    area: "練馬駅",
-    genres: ["鶏白湯"],
-    features: "博多水炊きの製法を元にした鶏スープ。化学調味料不使用。鶏つみれと柚子つくね入りの「よくばり水炊き」が人気。",
-    recommendation: "よくばり水炊き中華そば",
-    mapKeyword: "うかんむり 練馬",
-    lat: 35.7438,
-    lng: 139.6495,
-    image: "🐔"
-  },
-  {
-    name: "会津喜多方ラーメン 小法師 練馬中央店",
-    area: "練馬駅",
-    genres: ["あっさり系"],
-    features: "平打ち熟成多加水麺の喜多方ラーメン。トロトロチャーシューとモチモチ麺。和風でおしゃれな店内。",
-    recommendation: "喜多方ラーメン",
-    mapKeyword: "小法師 練馬",
-    lat: 35.7444,
-    lng: 139.6500,
-    image: "🍜"
-  },
-  {
-    name: "麺 酒 やまの",
-    area: "練馬駅",
-    genres: ["まぜそば"],
-    features: "魚粉の香りが豊かな王道まぜそば。追い飯無料で最後まで楽しめる。常に行列ができる練馬の人気店。",
-    recommendation: "まぜそば（追い飯付き）",
-    mapKeyword: "麺 酒 やまの 練馬",
-    lat: 35.7440,
-    lng: 139.6505,
-    image: "🍚"
-  },
-  {
-    name: "安ざわ家 練馬店",
-    area: "練馬駅",
-    genres: ["あっさり系"],
-    features: "生姜香る醤油ラーメンととろけるチャーシューが名物。チャーシューエッグ定食がコスパ抜群。",
-    recommendation: "中華そば＋チャーシューエッグ定食",
-    mapKeyword: "安ざわ家 練馬",
-    lat: 35.7443,
-    lng: 139.6498,
-    image: "🍳"
-  },
-  {
-    name: "神兵衛",
-    area: "練馬駅",
-    genres: ["濃厚系"],
-    features: "12時間煮込んだベジポタスープがクセになる一杯。珍しい野菜系濃厚スープ。全部のせにはチャーシュー・煮卵・海苔・ネギが乗る。",
-    recommendation: "ベジポタらーめん（全部のせ）",
-    mapKeyword: "神兵衛 練馬",
-    lat: 35.7446,
-    lng: 139.6518,
-    image: "🍅"
-  },
-  {
-    name: "麺屋 藤しろ 練馬店",
-    area: "練馬駅",
-    genres: ["鶏白湯"],
-    features: "大山地鶏ベースの鶏白湯。コラーゲン豊富で女性に大人気。低温調理チャーシューが絶品。",
-    recommendation: "芳醇鶏白湯味玉ラーメン",
-    mapKeyword: "麺屋 藤しろ 練馬",
-    lat: 35.7447,
-    lng: 139.6510,
-    image: "🐔"
-  },
-
-  // ===== 桜台エリア =====
-  {
-    name: "桜台らぁ麺 美志満",
-    area: "桜台駅",
-    genres: ["あっさり系"],
-    features: "練馬駅から徒歩10分。イワシ・シイタケ・昆布から旨味が出た黄金のスープ。カウンター7席のみの小さな名店。",
-    recommendation: "魚介塩チャーシュー麺",
-    mapKeyword: "桜台らぁ麺 美志満 桜台",
-    lat: 35.7435,
-    lng: 139.6470,
-    image: "🧂"
-  },
-  {
-    name: "中華そば べんてん",
-    area: "練馬区内（桜台周辺）",
-    genres: ["あっさり系"],
-    features: "ラーメンデータベース練馬区ランキング1位。練馬区が誇る最高峰の中華そば。行列必至の超人気店。",
-    recommendation: "中華そば",
-    mapKeyword: "中華そば べんてん 練馬",
-    lat: 35.7441,
-    lng: 139.6512,
-    image: "🍜"
-  },
-  {
-    name: "ふくちゃん",
-    area: "練馬・桜台周辺",
-    genres: ["濃厚系"],
-    features: "このご時世に700円で食べられるとんこつランチが話題。とんこつラーメン＋とろろ丼セットがコスパ抜群。",
-    recommendation: "とんこつラーメン＋とろろ丼セット",
-    mapKeyword: "ふくちゃん 練馬",
-    lat: 35.7445,
-    lng: 139.6488,
-    image: "🐷"
-  },
-
-  // ===== 中村橋・富士見台エリア =====
-  {
-    name: "富士見台 大勝軒",
-    area: "富士見台駅",
-    genres: ["つけ麺"],
-    features: "富士見台駅から98m。地元住民に長く愛される名店。東京豚骨醤油の王道つけ麺。中太麺のコシとスープの相性が抜群。",
-    recommendation: "つけ麺（特製）",
-    mapKeyword: "富士見台 大勝軒",
-    lat: 35.7398,
-    lng: 139.6318,
-    image: "🥢"
-  },
-  {
-    name: "麺処 盛盛",
-    area: "富士見台駅",
-    genres: ["濃厚系"],
-    features: "富士見台の実力派として注目される伸び盛りの店。動物系出汁と魚介の香りが重なる深い味わい。チャーシューの仕上がりが特に高評価。",
-    recommendation: "特製らーめん",
-    mapKeyword: "麺処 盛盛 富士見台",
-    lat: 35.7395,
-    lng: 139.6315,
-    image: "🍜"
-  },
-  {
-    name: "うまいエクスプレス",
-    area: "富士見台駅",
-    genres: ["あっさり系"],
-    features: "富士見台駅から66m。キレのある醤油の旨味が後を引く昔ながらの中華そば。細麺がスープをよく吸う。毎日食べたくなる味。",
-    recommendation: "中華そば",
-    mapKeyword: "うまいエクスプレス 富士見台",
-    lat: 35.7400,
-    lng: 139.6320,
-    image: "🚂"
-  },
-
-  // ===== 練馬高野台エリア =====
-  {
-    name: "麺処 穂し乃",
-    area: "練馬高野台駅・光が丘周辺",
-    genres: ["濃厚系"],
-    features: "煮干しと大量の鶏がらのWスープが絶品。光が丘エリアで行列ができる人気店。遠方からも訪れるファンがいる。",
-    recommendation: "特製ラーメン",
-    mapKeyword: "麺処 穂し乃 光が丘",
-    lat: 35.7280,
-    lng: 139.6180,
-    image: "🐟"
-  },
-
-  // ===== その他練馬区内の名店 =====
-  {
-    name: "麺や金時",
-    area: "江古田駅・小竹向原駅周辺",
-    genres: ["その他"],
-    features: "ミシュランビブグルマン3年連続選出。マツコの知らない世界で紹介された汁なし担々麺が看板。透き通った塩らぁ麺も絶品。",
-    recommendation: "汁なし担々麺 / 味玉塩らぁ麺",
-    mapKeyword: "麺や金時 江古田",
-    lat: 35.7350,
-    lng: 139.6650,
-    image: "🥇"
-  },
-  {
-    name: "ラーメン屋ジョン",
-    area: "武蔵関駅周辺",
-    genres: ["濃厚系"],
-    features: "ラーメンデータベース練馬区ランキング3位。西武新宿線・武蔵関駅北口。濃厚スープが評判の実力店。",
-    recommendation: "特製ラーメン",
-    mapKeyword: "ラーメン屋ジョン 武蔵関",
-    lat: 35.7480,
-    lng: 139.5760,
-    image: "🍜"
-  },
-  {
-    name: "神也 kaminari",
-    area: "東武練馬駅",
-    genres: ["あっさり系"],
-    features: "2020年オープン。厳選素材と丁寧な調理の鶏系スープ。遠方からもファンが訪れる隠れた名店。",
-    recommendation: "鶏塩らーめん",
-    mapKeyword: "神也 kaminari 東武練馬",
-    lat: 35.7510,
-    lng: 139.6420,
-    image: "⚡"
-  },
-  {
-    name: "来来亭 練馬店",
-    area: "練馬区内",
-    genres: ["あっさり系"],
-    features: "京都風醤油の鶏ガラスープに背脂。コクがあるのに飲み干せる絶妙なバランス。細麺がよく絡む。ネギ多めがおすすめ。",
-    recommendation: "ラーメン（背脂・ネギ多め）",
-    mapKeyword: "来来亭 練馬",
-    lat: 35.7430,
-    lng: 139.6480,
-    image: "🍜"
-  },
-  {
-    name: "喜多方ラーメン 坂内 練馬店",
-    area: "練馬駅",
-    genres: ["あっさり系"],
-    features: "福島・喜多方の老舗直系。あっさり醤油スープと平打ち麺の組み合わせが絶品。肉そばのチャーシューが特に人気。",
-    recommendation: "肉そば",
-    mapKeyword: "坂内 練馬",
-    lat: 35.7449,
-    lng: 139.6522,
-    image: "🐷"
-  },
-  {
-    name: "ラーメン ささら",
-    area: "氷川台駅",
-    genres: ["濃厚系"],
-    features: "氷川台エリアの人気店。豚バラらーめんと餃子の組み合わせが地元民のお気に入り。",
-    recommendation: "豚バラらーめん＋餃子",
-    mapKeyword: "ラーメン ささら 氷川台",
-    lat: 35.7390,
-    lng: 139.6380,
-    image: "🥟"
-  },
-  {
-    name: "麺屋わおん",
-    area: "上石神井駅",
-    genres: ["あっさり系"],
-    features: "丁寧に取ったスープと自家製麺のこだわりが光る一杯。上石神井の人気店。",
-    recommendation: "醤油らーめん",
-    mapKeyword: "麺屋わおん 上石神井",
-    lat: 35.7460,
-    lng: 139.5950,
-    image: "🎵"
-  },
-  {
-    name: "げんこつらぅめん 屋台や",
-    area: "平和台駅",
-    genres: ["濃厚系"],
-    features: "平和台駅から徒歩6分。豚骨＆鶏ガラをとことん炊いた濃厚スープに濃いめの醤油ダレ。レベルの高い家系ラーメン。",
-    recommendation: "げんこつらーめん＋背脂丼",
-    mapKeyword: "げんこつらぅめん 屋台や 平和台",
-    lat: 35.7420,
-    lng: 139.6550,
-    image: "🍜"
-  }
+  // 16-50 オリジナルの名店 (Original Classics - Translated & Restored)
+  { name: "麺処 井の庄", en_name: "Mendokoro Inosho", area: "石神井公園", genres: ["つけ麺", "濃厚系"], features: "カップ麺にもなった「辛辛魚つけ麺」は豚骨魚介スープに唐辛子が絡む激辛の芸術。", en_features: "Legendary shop famous for 'Karakara Uo' (Spicy Fish) Tsukemen. Features a rich pork-seafood broth heavily spiced with chili.", recommendation: "辛辛魚つけ麺 / Spicy Fish Tsukemen", lat: 35.7381, lng: 139.5986 },
+  { name: "らぁ麺 和來", en_name: "Ramen Warai", area: "石神井公園", genres: ["まぜそば", "あっさり系"], features: "トリュフ薫る漬け卵黄を絡めて食べるまぜそばが絶品。洗練された淡麗スープも人気。", en_features: "Elegant mazesoba (soupless ramen) topped with a truffle-infused cured egg yolk. Highly sophisticated.", recommendation: "まぜそば / Truffle Mazesoba", lat: 35.7375, lng: 139.5990 },
+  { name: "ラーメン春樹", en_name: "Ramen Haruki", area: "石神井公園", genres: ["家系", "濃厚系"], features: "深夜まで営業している安心感。好みに合わせてチューニングできる横浜家系。", en_features: "Open late night. A comforting Yokohama Iekei ramen where you can customize noodles and oil.", recommendation: "ラーメン（硬め・濃いめ） / Customized Ramen", lat: 35.7368, lng: 139.5978 },
+  { name: "中華そば べんてん", en_name: "Chuka Soba Benten", area: "成増", genres: ["あっさり系", "つけ麺"], features: "かつて高田馬場で伝説と呼ばれた名店。自家製麺と奥深い和風スープの組み合わせは至高。", en_features: "A legendary shop. Exceptional handmade noodles in a profound traditional Japanese soup.", recommendation: "塩ラーメン / Shio Ramen", lat: 35.7441, lng: 139.6512 },
+  { name: "RAMEN GOTTSU", en_name: "RAMEN GOTTSU", area: "練馬駅", genres: ["濃厚系", "その他"], features: "魚介豚骨の濃密白湯スープ。ミシュラン・ビブグルマン選出のスタイリッシュな店。", en_features: "Sleek atmosphere serving dense, award-winning pork & seafood paitan broth. Michelin Bib Gourmand.", recommendation: "GOTTSUらーめん / Gottsu Signature Ramen", lat: 35.7448, lng: 139.6508 },
+  { name: "濃菜麺 井の庄", en_name: "Kousaimen Inosho", area: "練馬駅", genres: ["濃厚系"], features: "大量の野菜と濃厚ドロドロスープのパワフルな一杯。ジューシーなローストポークも絶品。", en_features: "Powerful ramen packed with vegetables in an ultra-thick soup, topped with juicy roast pork.", recommendation: "濃菜麺 / Kousaimen (Thick Veggie Ramen)", lat: 35.7445, lng: 139.6515 },
+  { name: "ぼにしも", en_name: "Bonishimo", area: "練馬駅", genres: ["あっさり系"], features: "鶏と魚介のクラシックなあっさりスープが沁み渡る。こぢんまりとした隠れ家的な名店。", en_features: "A comforting classic clear broth made from chicken and seafood. A cozy, hidden-gem shop.", recommendation: "チャーシューめん / Chashu Ramen", lat: 35.7442, lng: 139.6502 },
+  { name: "ドリルマン", en_name: "Drillman", area: "練馬駅", genres: ["あっさり系", "つけ麺"], features: "秋田県産醤油や厳選煮干しを使用した、洗練された一杯。レンガ調でおしゃれ。", en_features: "Stylish shop using premium Akita soy sauce and selected dried sardines (Niboshi) for an elegant flavor.", recommendation: "特製中華そば / Special Chuka Soba", lat: 35.7450, lng: 139.6520 },
+  { name: "うかんむり", en_name: "Ukanmuri", area: "練馬駅", genres: ["鶏白湯"], features: "博多水炊きの製法を元にした無化調の鶏スープ。鶏つみれが美味しい体に優しい一杯。", en_features: "Chemical-free chicken soup based on Hakata Mizutaki (hot pot) technique. Features delicious chicken meatballs.", recommendation: "水炊き中華そば / Mizutaki Chicken Ramen", lat: 35.7438, lng: 139.6495 },
+  { name: "麺屋 藤しろ", en_name: "Menya Fujishiro", area: "練馬駅", genres: ["鶏白湯"], features: "大山地鶏を贅沢に使ったコラーゲンたっぷりの鶏白湯。女性にも大人気。", en_features: "Tori Paitan (rich chicken broth) made with premium Daisen chicken. Very rich in collagen and popular among women.", recommendation: "鶏白湯ラーメン / Tori Paitan", lat: 35.7447, lng: 139.6510 },
+  { name: "安ざわ家", en_name: "Anzawaya", area: "練馬駅", genres: ["あっさり系", "濃厚系"], features: "生姜がガツンと効いた長岡生姜醤油ラーメンと、ボリューム満点の定食が名物。", en_features: "Famous for its punchy Ginger-Shoyu ramen and monstrous meat set meals.", recommendation: "中華そば＋チャーシューエッグ / Shoyu & Char Siu Egg", lat: 35.7443, lng: 139.6498 },
+  { name: "麺 酒 やまの", en_name: "Yamano", area: "練馬駅", genres: ["まぜそば"], features: "台湾まぜそばのインスパイア系でありながら独自の進化を遂げた大人気店。追い飯は必須。", en_features: "Wildly popular for its Taiwan Mazesoba (spicy soupless noodles). Finishing the leftover sauce with rice is a must.", recommendation: "まぜそば052 / Mazesoba 052", lat: 35.7440, lng: 139.6505 },
+  { name: "神兵衛", en_name: "Jinbee", area: "練馬駅", genres: ["濃厚系"], features: "野菜ポタージュのベジポタスープがクセになる、少し変わった濃厚ラーメン。", en_features: "A unique Veggie-Potage (rich vegetable) thick soup that is incredibly addictive.", recommendation: "ベジポタらーめん / Veggie Potage Ramen", lat: 35.7446, lng: 139.6518 },
+  { name: "小法師", en_name: "Kobo-shi", area: "練馬駅", genres: ["あっさり系", "その他"], features: "会津喜多方ラーメンのお店。平打ち熟成多加水麺とトロトロの手作りチャーシューが最高。", en_features: "Authentic Aizu Kitakata ramen featuring flat wavy high-hydration noodles and extremely tender pork.", recommendation: "喜多方ラーメン / Kitakata Ramen", lat: 35.7444, lng: 139.6500 },
+  { name: "坂内", en_name: "Bannai", area: "練馬駅", genres: ["あっさり系"], features: "全国にファンを持つ喜多方ラーメンのチェーン。あっさり醤油とたっぷりの肉が特徴。", en_features: "Famous Kitakata ramen chain offering a clean soy broth and generous portions of sliced pork.", recommendation: "肉そば / Meat Soba", lat: 35.7449, lng: 139.6522 },
+  { name: "中華そば 座座", en_name: "Chuka Soba Zaza", area: "大泉学園", genres: ["あっさり系", "その他"], features: "トロトロに煮込まれた豚バラ軟骨（バイカ）が乗る個性派。黒いスープなのにスッキリとした甘みがある。", en_features: "Unique ramen topped with ultra-tender braised pork ribs. The dark soup has a surprisingly clean sweetness.", recommendation: "バイカ中華そば / Baika Chuka Soba", lat: 35.7520, lng: 139.5820 },
+  { name: "らーめん こうすけ", en_name: "Ramen Kosuke", area: "大泉学園", genres: ["あっさり系"], features: "路地裏に佇む名店。クリアで繊細な塩スープは、最後の一滴まで飲み干したくなるほど。", en_features: "A hidden gem in the alleys. The clear and delicate Shio (salt) broth makes you want to drink every last drop.", recommendation: "特製塩ラーメン / Special Shio Ramen", lat: 35.7518, lng: 139.5818 },
+  { name: "麺亭 英", en_name: "Mentei Hide", area: "大泉学園", genres: ["あっさり系"], features: "丁寧に作られたこだわりの中華そば。シンプルだからこそ技が光る味わい。", en_features: "Carefully crafted traditional Chuka Soba. A simple yet incredibly skillful flavor.", recommendation: "醤油ラーメン / Shoyu Ramen", lat: 35.7515, lng: 139.5815 },
+  { name: "睡大虎", en_name: "Suidaiko", area: "東大泉", genres: ["その他"], features: "土鍋でグツグツと煮えたぎる熱々のラーメンが名物の老舗。ボリューム満点。", en_features: "A long-established shop famous for its boiling hot ramen served in an earthen pot (donabe).", recommendation: "土鍋ラーメン / Donabe Ramen", lat: 35.7412, lng: 139.5902 },
+  { name: "丸源ラーメン", en_name: "Marugen Ramen", area: "大泉学園", genres: ["濃厚系"], features: "肉そばが看板メニュー。豚骨鶏ガラのスープに甘辛いお肉がたっぷり乗った一杯。", en_features: "Famous for 'Niku-Soba' (Meat Ramen). A deep broth topped with generous sweet and spicy pork.", recommendation: "肉そば / Niku Soba", lat: 35.7522, lng: 139.5825 },
+  { name: "富士見台 大勝軒", en_name: "Fujimidai Taishoken", area: "富士見台", genres: ["つけ麺"], features: "地元民に深く愛されるクラシックな「もりそば」。太麺と酸味のあるスープが完璧にマッチ。", en_features: "Classic 'Morisoba' (tsukemen) loved by locals. Features thick dipping noodles with a sweet and sour broth.", recommendation: "もりそば / Morisoba (Tsukemen)", lat: 35.7398, lng: 139.6318 },
+  { name: "麺処 盛盛", en_name: "Mendokoro Morimori", area: "富士見台", genres: ["濃厚系"], features: "動物系出汁と魚介の香りが重なる深みのある味わい。質の高いチャーシューも評判。", en_features: "A deep flavor combining animal broth and seafood aromas. Highly praised for its quality char siu (pork).", recommendation: "特製らーめん / Special Ramen", lat: 35.7395, lng: 139.6315 },
+  { name: "うまいエクスプレス", en_name: "Umai Express", area: "富士見台", genres: ["あっさり系"], features: "昔ながらのキレのある醤油中華そば。毎日食べても飽きない安心の味。", en_features: "Old-school sharp soy-sauce Chuka Soba. A comforting taste you won't get tired of eating every day.", recommendation: "中華そば / Chuka Soba", lat: 35.7400, lng: 139.6320 },
+  { name: "麺処 穂し乃", en_name: "Mendokoro Hoshino", area: "練馬高野台", genres: ["濃厚系", "あっさり系"], features: "煮干しと大量の鶏がらのWスープが絶品。光が丘エリアで常に行列ができる超人気店。", en_features: "Exceptional double soup made from dried sardines and heavy chicken bones. Very popular in its area.", recommendation: "特製中華そば / Special Chuka Soba", lat: 35.7280, lng: 139.6180 },
+  { name: "麺や金時", en_name: "Menya Kintoki", area: "江古田", genres: ["その他", "まぜそば"], features: "クリアな塩ラーメンと、本格スパイシーな汁なし担々麺が看板。全国レベルの実力店。", en_features: "National-level shop known for crystal clear Shio ramen and super authentic Soupless Tantanmen.", recommendation: "塩らぁ麺 または 汁なし担々麺 / Shio or Tantanmen", lat: 35.7350, lng: 139.6650 },
+  { name: "ラーメン屋ジョン", en_name: "Ramen-ya John", area: "武蔵関", genres: ["濃厚系", "あっさり系"], features: "練馬区西部エリアを代表する名店。濃厚スープから煮干しまで幅広いメニューを高い次元で提供。", en_features: "A top-ranked shop. Offers everything from rich tonkotsu-style to delicate niboshi at a very high level.", recommendation: "特製ラーメン / Special Ramen", lat: 35.7480, lng: 139.5760 },
+  { name: "神也", en_name: "Kaminari", area: "東武練馬", genres: ["あっさり系"], features: "厳選素材を使用した端麗系塩ラーメンが人気の隠れた名店。丁寧な仕事が光る。", en_features: "A hidden gem popular for its elegant, clear Shio ramen made with carefully selected ingredients.", recommendation: "塩らーめん / Shio Ramen", lat: 35.7510, lng: 139.6420 },
+  { name: "来来亭", en_name: "Rairai-tei", area: "石神井", genres: ["あっさり系", "その他"], features: "京都風醤油の鶏ガラスープに背脂がチャッチャと乗る。ネギ多めカスタマイズがおすすめ。", en_features: "Kyoto-style chicken shoyu ramen topped with savory pork back fat. Ordering extra green onions is recommended.", recommendation: "ラーメン（背脂多め） / Ramen (Extra Fat)", lat: 35.7430, lng: 139.6480 },
+  { name: "ささら", en_name: "Sasara", area: "氷川台", genres: ["濃厚系"], features: "地元の人で賑わう名店。コクのあるスープと自家製餃子が鉄板の組み合わせ。", en_features: "Bustling local shop. A strong, rich soup paired with their homemade gyoza is an ironclad combination.", recommendation: "らーめん / Ramen", lat: 35.7390, lng: 139.6380 },
+  { name: "麺屋わおん", en_name: "Menya Waon", area: "上石神井", genres: ["あっさり系"], features: "丁寧に取られた和風出汁と上品な麺のバランスが秀逸。落ち着いた雰囲気のお店。", en_features: "The balance between carefully drawn Japanese dashi (broth) and elegant noodles is excellent. Relaxing atmosphere.", recommendation: "醤油らーめん / Shoyu Ramen", lat: 35.7460, lng: 139.5950 },
+  { name: "げんこつらぅめん", en_name: "Genkotsu Ramen", area: "平和台", genres: ["濃厚系", "家系"], features: "濃いめにカエシが効いたパンチのある一杯。白ご飯がモリモリ進む濃い味の極み。", en_features: "A punchy bowl with strong soy-sauce 'kaeshi'. The ultimate rich taste that goes perfectly with white rice.", recommendation: "げんこつらーめん / Genkotsu Ramen", lat: 35.7420, lng: 139.6550 },
+  { name: "石神井とら", en_name: "Shakujii Tora", area: "石神井公園", genres: ["つけ麺"], features: "昔ながらの甘酢が効いた酸味のあるつけ汁が特徴のレトロなつけ麺。根強いファンが多い。", en_features: "Retro tsukemen featuring a dipping broth with old-fashioned sweet and sour vinegar. Has deep-rooted fans.", recommendation: "つけ麺 / Tsukemen", lat: 35.7370, lng: 139.5970 },
+  { name: "ラーメンハウスなか", en_name: "Ramen House Naka", area: "石神井公園", genres: ["あっさり系"], features: "驚きのワンコインで食べられる、ノスタルジー溢れる昔ながらの屋台系ラーメン。", en_features: "Nostalgic street-food style ramen available for an incredibly low price.", recommendation: "ラーメン / Standard Ramen", lat: 35.7385, lng: 139.5995 },
+  { name: "ふくちゃん", en_name: "Fukuchan", area: "練馬・桜台", genres: ["濃厚系", "その他"], features: "安くて満腹になれる豚骨ラーメンと「とろろ丼」のセットが地元民のお財布と胃袋を救う。", en_features: "Cheap and filling Tonkotsu ramen sets. Highly valued by the local community for its cost performance.", recommendation: "とんこつラーメンセット / Tonkotsu Ramen Set", lat: 35.7445, lng: 139.6488 },
+  { name: "桜台らぁ麺 美志満", en_name: "Sakuradai Mishima", area: "桜台", genres: ["あっさり系"], features: "イワシ、シイタケ、昆布の旨味を凝縮した黄金色の塩スープ。小さな店舗ながら実力派。", en_features: "Golden shio broth packed with umami from sardines, shiitake, and kelp. Small shop but highly acclaimed.", recommendation: "魚介塩チャーシュー麺 / Seafood Shio Chashu Ramen", lat: 35.7435, lng: 139.6470 }
 ];
 
 let map;
 let markers = [];
 
+// Icons & UI Logic
+function getGenreBorderClass(genres) {
+    if (genres.includes('濃厚系') || genres.includes('家系')) return 'orange-border';
+    if (genres.includes('あっさり系') || genres.includes('鶏白湯')) return 'gold-border';
+    if (genres.includes('まぜそば') || genres.includes('つけ麺')) return 'blue-border';
+    if (genres.includes('その他')) return 'gray-border';
+    return 'gold-border';
+}
+
+function getShopInitialSymbol(en_name) {
+    // get first letters of first two words, fallback fully
+    let words = en_name.replace(/[^a-zA-Z ]/g, "").split(" ").filter(w => w.length > 0);
+    if(words.length >= 2) {
+        return (words[0][0] + words[1][0]).toUpperCase();
+    } else if (words.length === 1 && words[0].length >= 2) {
+        return words[0].substring(0,2).toUpperCase();
+    } else {
+        return "RM";
+    }
+}
+
+function getGenreColor(genres) {
+    if (genres.includes('濃厚系') || genres.includes('家系')) return '#ff5500'; // Neon Orange
+    if (genres.includes('あっさり系') || genres.includes('鶏白湯')) return '#d4af37'; // Gold
+    if (genres.includes('まぜそば') || genres.includes('つけ麺')) return '#1e90ff'; // Dodger Blue
+    return '#888888';
+}
+
 function initMap() {
     if (map) return;
-    map = L.map('map').setView([35.742, 139.619], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    map = L.map('map', {
+        zoomControl: false
+    }).setView([35.743, 139.630], 13);
+    
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OSM & CARTO'
     }).addTo(map);
+    
+    L.control.zoom({ position: 'bottomright' }).addTo(map);
 
     ramenShops.forEach(shop => {
         if (shop.lat && shop.lng) {
             const color = getGenreColor(shop.genres);
             const markerIcon = L.divIcon({
                 className: 'custom-marker',
-                html: `<div style="background-color: ${color}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
+                html: `<div style="background-color: ${color}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 10px ${color};"></div>`,
                 iconSize: [14, 14],
                 iconAnchor: [7, 7],
                 popupAnchor: [0, -7]
             });
             
-            const mapQuery = encodeURIComponent(shop.mapKeyword || (shop.name + " " + shop.area));
+            const mapQuery = encodeURIComponent(shop.name + " 練馬");
             const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
             const popupContent = `
-                <div style="font-size: 14px; line-height: 1.4;">
-                    <strong style="font-size: 16px;">${shop.name}</strong><br>
-                    <span style="font-size:12px;color:#666;">（${shop.area} / ${shop.genres.join(', ')}）</span><br>
-                    <span style="font-size:12px;color:#d4622a;font-weight:bold;margin-top:4px;display:inline-block;">★おすすめ: ${shop.recommendation}</span><br>
-                    <a href="${mapLink}" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:12px;padding:6px 12px;background:#1a1a1a;color:white;text-decoration:none;border-radius:20px;font-size:12px;font-weight:bold;">📍 Googleマップで開く</a>
+                <div style="font-family: var(--font-en); background: #1a1a1a; padding: 12px; border-radius: 8px; color: #f5f5f5; border: 1px solid rgba(255,255,255,0.1);">
+                    <strong style="font-size: 16px; font-family: var(--font-ja); display:block; color: #fff;">${shop.name}</strong>
+                    <span style="font-size: 11px; color: #aaa; text-transform:uppercase;">${shop.en_name}</span><br>
+                    <span style="font-size: 10px; color: var(--primary-gold); margin-top:6px; display:inline-block;">★ RECOMMENDED</span><br>
+                    <span style="font-size: 13px; font-family: var(--font-ja); font-weight: bold; color: white;">${shop.recommendation}</span><br>
+                    <a href="${mapLink}" target="_blank" rel="noopener noreferrer" style="display:inline-block; margin-top:12px; padding:8px 14px; background:var(--primary-gold); color:#000; text-decoration:none; border-radius:20px; font-size:11px; font-weight:bold; letter-spacing:1px;">📍 OPEN IN MAPS</a>
                 </div>
             `;
 
-            const marker = L.marker([shop.lat, shop.lng], { icon: markerIcon }).bindPopup(popupContent);
+            const marker = L.marker([shop.lat, shop.lng], { icon: markerIcon }).bindPopup(popupContent, {
+                className: 'premium-popup'
+            });
             marker.genre = shop.genres;
             markers.push(marker);
             marker.addTo(map);
@@ -441,6 +134,14 @@ function initMap() {
 
     updateMapFilters();
 }
+
+const style = document.createElement('style');
+style.innerHTML = `
+    .premium-popup .leaflet-popup-content-wrapper { background: #0a0a0a; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+    .premium-popup .leaflet-popup-tip { background: #0a0a0a; border: 1px solid #333; }
+    .premium-popup .leaflet-popup-close-button { color: #fff !important; }
+`;
+document.head.appendChild(style);
 
 function updateMapFilters() {
     if (!map) return;
@@ -472,29 +173,14 @@ function switchView(viewType) {
         btnMap.classList.add('active');
         
         if (!map) {
-            // Leaflet map requires the container to be visible when initializing
-            setTimeout(() => {
-                initMap();
-            }, 50);
+            setTimeout(() => { initMap(); }, 50);
         } else {
-            setTimeout(() => {
-                map.invalidateSize();
-            }, 50);
+            setTimeout(() => { map.invalidateSize(); }, 50);
         }
     }
 }
 
-
 let currentFilter = 'all';
-
-function getGenreColor(genres) {
-    if (genres.includes('濃厚系')) return '#1a1a1a';
-    if (genres.includes('あっさり系')) return '#d4622a';
-    if (genres.includes('鶏白湯')) return '#1a9e75';
-    if (genres.includes('まぜそば') || genres.includes('つけ麺')) return '#5b7ec9';
-    if (genres.includes('家系')) return '#8b4b8b';
-    return '#ccc'; // その他など
-}
 
 function renderShops() {
     const container = document.getElementById('shop-container');
@@ -506,36 +192,47 @@ function renderShops() {
 
     const countDisplay = document.getElementById('shop-count-display');
     if (countDisplay) {
-        countDisplay.textContent = `全${filteredShops.length}店舗`;
+        countDisplay.innerHTML = `<span class="en">TOTAL ${filteredShops.length} SHOPS</span> / <span class="ja">全${filteredShops.length}店舗</span>`;
     }
 
     if (filteredShops.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:#666; margin-top:20px;">該当する店舗がありません。</p>';
+        container.innerHTML = '<p style="text-align:center; color:#666; margin-top:20px; font-family: var(--font-en);">No shops found.</p>';
         return;
     }
 
     filteredShops.forEach(shop => {
         const card = document.createElement('div');
-        card.className = 'shop-card';
+        card.className = 'shop-card block-hover';
         
-        // 追加: ジャンルごとのアクセントライン（左ボーダー4px）
-        card.style.borderLeft = `4px solid ${getGenreColor(shop.genres)}`;
+        const accentColor = getGenreColor(shop.genres);
+        const borderClass = getGenreBorderClass(shop.genres);
+        const symbol = getShopInitialSymbol(shop.en_name);
+        
+        card.style.borderLeft = `4px solid ${accentColor}`;
 
-        // Google Maps Link Creation
-        const mapQuery = encodeURIComponent(shop.mapKeyword || (shop.name + " " + shop.area));
+        const mapQuery = encodeURIComponent(shop.name + " 練馬");
         const mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
         card.innerHTML = `
-            <div class="shop-icon">${shop.image}</div>
+            <div class="shop-icon ${borderClass}">${symbol}</div>
             <div class="shop-content">
                 <div class="shop-area">${shop.area}</div>
-                <h2 class="shop-name"><a href="${mapLink}" target="_blank" rel="noopener noreferrer">${shop.name}</a></h2>
+                <h2 class="shop-name">${shop.name}</h2>
+                <div class="shop-name-en">${shop.en_name}</div>
+                
                 <p class="shop-features">${shop.features}</p>
+                <p class="shop-features-en">${shop.en_features}</p>
+                
                 <div class="shop-recommendation">
-                    <span class="recommendation-label">おすすめ</span>
+                    <span class="recommendation-label">Recommend / おすすめ</span>
                     <span class="recommendation-menu">${shop.recommendation}</span>
                 </div>
-                <div class="shop-footer">※営業時間・定休日は変更になる場合があります。事前にご確認ください。</div>
+                
+                <div class="map-btn-container">
+                    <a href="${mapLink}" class="map-link-btn" target="_blank" rel="noopener noreferrer">
+                        <span style="font-size: 16px;">📍</span> OPEN IN GOOGLE MAPS
+                    </a>
+                </div>
             </div>
         `;
 
@@ -547,127 +244,91 @@ function renderShops() {
 function toggleChat() {
     const chatWindow = document.getElementById('chat-window');
     chatWindow.classList.toggle('hidden');
-    if (!chatWindow.classList.contains('hidden')) {
-        document.getElementById('chat-input').focus();
-    }
 }
 
-function handleChatKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-}
+function sendMessage(displayLabel, searchKeywords) {
+    appendMessage(displayLabel, 'user');
 
-function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const message = input.value.trim();
-    if (!message) return;
-
-    appendMessage(message, 'user');
-    input.value = '';
-
-    // Mock AI Response
     setTimeout(() => {
-        const response = generateAIResponse(message);
+        const response = generateAIResponse(searchKeywords);
         appendMessage(response, 'ai');
-    }, 500);
+    }, 600);
 }
 
 function appendMessage(text, sender) {
     const messagesContainer = document.getElementById('chat-messages');
     const msgDiv = document.createElement('div');
     msgDiv.className = `message ${sender}-message`;
-    msgDiv.textContent = text;
+    
+    if (sender === 'user') {
+        const parts = text.split(" / ");
+        if(parts.length > 1) {
+            msgDiv.innerHTML = `${parts[0]} <span class="en-msg">${parts[1]}</span>`;
+        } else {
+            msgDiv.innerHTML = text;
+        }
+    } else {
+        msgDiv.innerHTML = text;
+    }
+    
     messagesContainer.appendChild(msgDiv);
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function generateAIResponse(message) {
-    const keywords = message.trim().split(/\s+|、|。|・|，|．/);
-    if (keywords.length === 0 || keywords[0] === '') {
-        return 'キーワードを入力して検索できます！（例：「大泉学園 濃厚」「桜台 あっさり」など）';
-    }
-
-    let results = ramenShops;
-
-    // AND search for all keywords
-    keywords.forEach(keyword => {
-        if (!keyword) return;
-        const lowerKeyword = keyword.toLowerCase();
-        
-        // Define some synonym mappings for genres
-        let searchKeyword = lowerKeyword;
-        if (searchKeyword.includes('こってり') || searchKeyword.includes('どろどろ') || searchKeyword.includes('豚骨')) searchKeyword = '濃厚';
-        if (searchKeyword.includes('さっぱり') || searchKeyword.includes('昔ながら') || searchKeyword.includes('塩') || searchKeyword.includes('醤油')) searchKeyword = 'あっさり';
-        if (searchKeyword.includes('お肉') || searchKeyword.includes('たくさん') || searchKeyword.includes('がっつり')) searchKeyword = 'ガッツリ';
-        if (searchKeyword.includes('汁なし')) searchKeyword = 'まぜそば';
-
-        results = results.filter(shop => {
-            const inName = shop.name.toLowerCase().includes(searchKeyword);
-            const inArea = shop.area.toLowerCase().includes(searchKeyword);
-            const inGenre = shop.genres.some(g => g.toLowerCase().includes(searchKeyword));
-            const inFeatures = shop.features.toLowerCase().includes(searchKeyword);
-            const inRecommend = shop.recommendation.toLowerCase().includes(searchKeyword);
-
-            return inName || inArea || inGenre || inFeatures || inRecommend;
+function generateAIResponse(keywordsString) {
+    const keywords = keywordsString.split(' ');
+    
+    let results = ramenShops.filter(shop => {
+        let match = false;
+        keywords.forEach(keyword => {
+            const sk = keyword.toLowerCase();
+            if (shop.name.toLowerCase().includes(sk) || 
+                shop.en_name.toLowerCase().includes(sk) ||
+                shop.area.toLowerCase().includes(sk) || 
+                shop.genres.some(g => g.toLowerCase().includes(sk)) || 
+                shop.features.toLowerCase().includes(sk) ||
+                shop.en_features.toLowerCase().includes(sk)) {
+                match = true;
+            }
         });
+        return match;
     });
+
+    // Shuffle and pick up to 3 results
+    results = results.sort(() => 0.5 - Math.random()).slice(0, 3);
 
     if (results.length === 0) {
-        return `「${message}」に一致する店舗は見つかりませんでした。\n条件を変えてもう一度お試しください！`;
+        return `ごめんなさい、見つかりませんでした🥺<br><span class="en-msg">Sorry, we couldn't find any matches.</span>`;
     }
-
-    // Format the response
-    let responseText = '';
     
-    // Group by area for better presentation if there are many results
-    const areas = [...new Set(results.map(s => s.area.split('・')[0].split('駅')[0]))];
-    const mainArea = areas[0];
-
-    if (areas.length === 1) {
-        responseText = `${mainArea}エリアのおすすめはこちらです！\n`;
-    } else {
-        responseText = `おすすめの店舗はこちらです！（全${results.length}件）\n`;
-    }
-
+    let html = `気分に合わせたおすすめのお店です！ / Here is our recommendation:<br><br>`;
     results.forEach(shop => {
-        const genreStr = shop.genres[0] || 'その他';
-        responseText += `・${shop.name}（${genreStr}）${shop.recommendation}\n`;
+        html += `<strong>${shop.name}</strong><br><span style="font-size:12px; color:#aaa;">(${shop.en_name} - ${shop.area})</span><br>🍜 ${shop.recommendation}<br><br>`;
     });
 
-    return responseText;
+    return html;
 }
 
 // Initial Setup
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial Render
     renderShops();
 
-    // Setup Filter Buttons
     const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Update active class
+            const target = e.currentTarget;
             filterBtns.forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
+            target.classList.add('active');
             
-            // Re-render
-            currentFilter = e.target.getAttribute('data-genre');
+            currentFilter = target.getAttribute('data-genre');
             renderShops();
             updateMapFilters();
         });
     });
 });
 
-// Service Worker Registration for PWA
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(registration => {
-                console.log('ServiceWorker registered with scope:', registration.scope);
-            })
-            .catch(error => {
-                console.error('ServiceWorker registration failed:', error);
-            });
+        navigator.serviceWorker.register('./sw.js').catch(err => console.error(err));
     });
 }
